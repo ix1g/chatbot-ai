@@ -48,7 +48,7 @@ src/
 1. **Node.js**: Ensure you have Node.js >=16.0.0 installed. [Download here](https://nodejs.org/)
 2. **Discord Bot**: Create a bot on the [Discord Developer Portal](https://discord.com/developers/applications)
 3. **Gemini API Key**: Obtain your API key from [Google AI Studio](https://aistudio.google.com/app/apikey)
-4. **Google Cloud Vision**: Set up Google Cloud Vision API (optional, for image analysis)
+4. **Google Cloud Vision**: Set up Google Cloud Vision API (optional, for image analysis) [Google Vision API](https://console.cloud.google.com/apis/library/vision.googleapis.com?project=elite-ceremony-456322-s5)
 
 ---
 
