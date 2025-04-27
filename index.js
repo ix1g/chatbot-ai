@@ -195,5 +195,5 @@ client.on("messageCreate", async (message) => {
     }
   }
 });
-
+// All right's reserved to sayrz studio visit us via https://sayrz.com
 client.login(DISCORD_TOKEN);
