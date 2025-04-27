@@ -90,3 +90,7 @@ Contributions are welcome! Feel free to submit issues or pull requests to improv
 ## License
 
 All rights reserved to Sayrz Studio. Visit us at [https://sayrz.com](https://sayrz.com).
+
+##
+
+- Note: You can use another gemini model like [gemini-1.5-pro](https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-pro-latest:generateContent?key=API_KEY)
