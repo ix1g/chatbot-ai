@@ -1,106 +1,68 @@
 <!DOCTYPE html>
-<html lang="en" class="h-full">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %> - Discord Bot Dashboard</title>
-    <link href="/css/output.css" rel="stylesheet">
-    <script defer src="https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    <link href="/css/style.css" rel="stylesheet">
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body class="h-full bg-nord-0 text-nord-4">
-    <div class="min-h-full">
-        <nav class="bg-nord-1 border-b border-nord-2">
-            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <div class="flex h-16 items-center justify-between">
-                    <div class="flex items-center">
-                        <div class="flex-shrink-0">
-                            <span class="text-2xl font-bold text-nord-8">Bot Dashboard</span>
-                        </div>
-                        <div class="hidden md:block">
-                            <div class="ml-10 flex items-baseline space-x-4">
-                                <a href="/" class="<%= title === 'Dashboard' ? 'bg-nord-2 text-nord-8' : 'text-nord-4 hover:bg-nord-2 hover:text-nord-8' %> rounded-md px-3 py-2 text-sm font-medium transition-all duration-200">Home</a>
-                                <a href="/stats" class="<%= title === 'Statistics' ? 'bg-nord-2 text-nord-8' : 'text-nord-4 hover:bg-nord-2 hover:text-nord-8' %> rounded-md px-3 py-2 text-sm font-medium transition-all duration-200">Statistics</a>
-                                <a href="/presence" class="<%= title === 'Presence Management' ? 'bg-nord-2 text-nord-8' : 'text-nord-4 hover:bg-nord-2 hover:text-nord-8' %> rounded-md px-3 py-2 text-sm font-medium transition-all duration-200">Presence</a>
-                                <a href="/config" class="<%= title === 'Configuration' ? 'bg-nord-2 text-nord-8' : 'text-nord-4 hover:bg-nord-2 hover:text-nord-8' %> rounded-md px-3 py-2 text-sm font-medium transition-all duration-200">Configuration</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hidden md:block">
-                        <div class="ml-4 flex items-center md:ml-6">
-                            <button type="button" class="rounded-full bg-nord-2 p-1 text-nord-4 hover:text-nord-8 transition-colors duration-200">
-                                <span class="sr-only">View notifications</span>
-                                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-                                </svg>
-                            </button>
-                            <% if (locals.user) { %>
-                                <div class="ml-3">
-                                    <a href="/auth/logout" class="inline-flex items-center rounded-md bg-nord-10 px-3 py-2 text-sm font-semibold text-nord-6 shadow-sm hover:bg-nord-9 transition-colors duration-200">
-                                        Logout
-                                    </a>
-                                </div>
-                            <% } %>
-                        </div>
-                    </div>
-                    <div class="-mr-2 flex md:hidden">
-                        <button type="button" @click="mobileMenu = !mobileMenu" class="inline-flex items-center justify-center rounded-md bg-nord-2 p-2 text-nord-4 hover:bg-nord-3 hover:text-nord-8 focus:outline-none focus:ring-2 focus:ring-nord-8">
-                            <span class="sr-only">Open main menu</span>
-                            <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                            </svg>
-                        </button>
-                    </div>
+<body>
+    <div class="page-wrapper">
+        <nav class="navbar">
+            <div class="navbar-container">
+                <div class="navbar-brand">Bot Dashboard</div>
+                <div class="navbar-menu">
+                    <ul class="navbar-nav">
+                        <li><a href="/" class="nav-link <%= title === 'Dashboard' ? 'active' : '' %>">Home</a></li>
+                        <li><a href="/stats" class="nav-link <%= title === 'Statistics' ? 'active' : '' %>">Statistics</a></li>
+                        <li><a href="/presence" class="nav-link <%= title === 'Presence Management' ? 'active' : '' %>">Presence</a></li>
+                        <li><a href="/config" class="nav-link <%= title === 'Configuration' ? 'active' : '' %>">Configuration</a></li>
+                    </ul>
                 </div>
-            </div>
-
-            <!-- Mobile menu -->
-            <div x-show="mobileMenu" class="md:hidden" x-cloak>
-                <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-                    <a href="/" class="<%= title === 'Dashboard' ? 'bg-nord-2 text-nord-8' : 'text-nord-4' %> block rounded-md px-3 py-2 text-base font-medium">Home</a>
-                    <a href="/stats" class="<%= title === 'Statistics' ? 'bg-nord-2 text-nord-8' : 'text-nord-4' %> block rounded-md px-3 py-2 text-base font-medium">Statistics</a>
-                    <a href="/presence" class="<%= title === 'Presence Management' ? 'bg-nord-2 text-nord-8' : 'text-nord-4' %> block rounded-md px-3 py-2 text-base font-medium">Presence</a>
-                    <a href="/config" class="<%= title === 'Configuration' ? 'bg-nord-2 text-nord-8' : 'text-nord-4' %> block rounded-md px-3 py-2 text-base font-medium">Configuration</a>
+                <div class="navbar-end">
+                    <button class="btn btn-icon" aria-label="Notifications">
+                        <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                        </svg>
+                    </button>
+                    <% if (locals.user) { %>
+                        <a href="/auth/logout" class="btn btn-primary">Logout</a>
+                    <% } %>
                 </div>
+                <button class="mobile-menu-button" x-on:click="mobileMenu = !mobileMenu">
+                    <svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-16 6h16" />
+                    </svg>
+                </button>
             </div>
         </nav>
 
-        <main>
-            <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-                <!-- Flash Messages -->
-                <% if (locals.success && success.length > 0) { %>
-                    <div class="mb-4 rounded-md bg-nord-14 bg-opacity-10 p-4 animate-fade-in">
-                        <div class="flex">
-                            <div class="flex-shrink-0">
-                                <svg class="h-5 w-5 text-nord-14" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                            <div class="ml-3">
-                                <p class="text-sm font-medium text-nord-14"><%= success %></p>
-                            </div>
-                        </div>
+        <main class="container">
+            <% if (locals.success && success.length > 0) { %>
+                <div class="alert alert-success fade-in">
+                    <div class="alert-content">
+                        <svg class="icon" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                        <p><%= success %></p>
                     </div>
-                <% } %>
-
-                <% if (locals.error && error.length > 0) { %>
-                    <div class="mb-4 rounded-md bg-nord-11 bg-opacity-10 p-4 animate-fade-in">
-                        <div class="flex">
-                            <div class="flex-shrink-0">
-                                <svg class="h-5 w-5 text-nord-11" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                            <div class="ml-3">
-                                <p class="text-sm font-medium text-nord-11"><%= error %></p>
-                            </div>
-                        </div>
-                    </div>
-                <% } %>
-
-                <div class="animate-fade-in">
-                    <%- body %>
                 </div>
+            <% } %>
+
+            <% if (locals.error && error.length > 0) { %>
+                <div class="alert alert-danger fade-in">
+                    <div class="alert-content">
+                        <svg class="icon" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                        </svg>
+                        <p><%= error %></p>
+                    </div>
+                </div>
+            <% } %>
+
+            <div class="content fade-in">
+                <%- body %>
             </div>
         </main>
     </div>

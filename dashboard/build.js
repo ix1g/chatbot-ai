@@ -1,17 +1,16 @@
-const { exec } = require('child_process');
+const fs = require('fs');
 const path = require('path');
 
-console.log('Building Tailwind CSS...');
-exec('npx postcss ./public/css/style.css -o ./public/css/output.css', {
-    cwd: path.join(__dirname)
-}, (error, stdout, stderr) => {
-    if (error) {
-        console.error(`Error: ${error}`);
-        return;
+try {
+    console.log('🎨 Ensuring CSS directory structure...');
+    
+    const cssDir = path.join(__dirname, 'public', 'css');
+    if (!fs.existsSync(cssDir)) {
+        fs.mkdirSync(cssDir, { recursive: true });
     }
-    if (stderr) {
-        console.error(`Stderr: ${stderr}`);
-        return;
-    }
-    console.log(`CSS build complete: ${stdout}`);
-});
+
+    console.log('✨ CSS setup completed!');
+} catch (error) {
+    console.error('❌ Setup failed:', error.message);
+    process.exit(1);
+}
