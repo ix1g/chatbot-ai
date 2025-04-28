@@ -1,0 +1,43 @@
+<%- include('layout', { title: 'Configuration' }) %>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Bot Configuration</h5>
+                <form action="/config/update" method="POST">
+                    <div class="mb-3">
+                        <label for="knowledge" class="form-label">Bot Knowledge Base</label>
+                        <textarea class="form-control" id="knowledge" name="knowledge" rows="4"><%= config.knowledge %></textarea>
+                        <div class="form-text">The base knowledge/personality for your bot</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="embedTitle" class="form-label">Embed Title</label>
+                        <input type="text" class="form-control" id="embedTitle" name="embedTitle" value="<%= config.embedTitle %>">
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="useEmbed" name="useEmbed" <%= config.useEmbed ? 'checked' : '' %>>
+                        <label class="form-check-label" for="useEmbed">Use Discord Embeds</label>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Model Selection</label>
+                        <select class="form-select" name="model">
+                            <option value="gemini-1.5-flash" <%= config.model === 'gemini-1.5-flash' ? 'selected' : '' %>>Gemini 1.5 Flash (Fast)</option>
+                            <option value="gemini-1.5-pro-latest" <%= config.model === 'gemini-1.5-pro-latest' ? 'selected' : '' %>>Gemini 1.5 Pro (Advanced)</option>
+                        </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="swearWordsFile" class="form-label">Content Filter File</label>
+                        <input type="text" class="form-control" id="swearWordsFile" name="swearWordsFile" value="<%= config.swearWordsFile %>">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Save Configuration</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
