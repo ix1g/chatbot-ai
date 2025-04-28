@@ -4,8 +4,10 @@
   "description": "A Discord bot integrated with Google's Gemini API and a web-based chat interfacee",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start": "node start.js",
+    "dev": "nodemon start.js",
+    "bot": "node index.js",
+    "dashboard": "node dashboard/server.js"
   },
   "dependencies": {
     "@google-cloud/vision": "^5.1.0",
