@@ -1,0 +1,74 @@
+<%- include('layout', { title: 'Presence Management' }) %>
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div class="bg-nord-1 rounded-xl shadow-xl p-6">
+        <h3 class="text-xl font-semibold text-nord-8 mb-6">Current Presence</h3>
+        <form action="/presence/update" method="POST" class="space-y-4">
+            <div>
+                <label class="block text-nord-4 text-sm font-medium mb-2">Status Text</label>
+                <input type="text" name="name" value="<%= currentPresence.name %>" required
+                    class="w-full bg-nord-2 border border-nord-3 rounded-lg px-4 py-2 text-nord-4 focus:ring-2 focus:ring-nord-8 focus:border-transparent">
+            </div>
+            
+            <div>
+                <label class="block text-nord-4 text-sm font-medium mb-2">Activity Type</label>
+                <select name="type" class="w-full bg-nord-2 border border-nord-3 rounded-lg px-4 py-2 text-nord-4 focus:ring-2 focus:ring-nord-8 focus:border-transparent">
+                    <option value="Playing" <%= currentPresence.type === 'Playing' ? 'selected' : '' %>>Playing</option>
+                    <option value="Watching" <%= currentPresence.type === 'Watching' ? 'selected' : '' %>>Watching</option>
+                    <option value="Listening" <%= currentPresence.type === 'Listening' ? 'selected' : '' %>>Listening</option>
+                    <option value="Competing" <%= currentPresence.type === 'Competing' ? 'selected' : '' %>>Competing</option>
+                </select>
+            </div>
+
+            <button type="submit" class="w-full bg-nord-10 hover:bg-nord-9 text-nord-6 font-semibold py-2 px-4 rounded-lg transition-all duration-300 hover:scale-[1.02]">
+                Update Presence
+            </button>
+        </form>
+    </div>
+
+    <div class="bg-nord-1 rounded-xl shadow-xl p-6">
+        <h3 class="text-xl font-semibold text-nord-8 mb-6">Presence States</h3>
+        <div class="space-y-4">
+            <% presenceStates.forEach((state, index) => { %>
+                <div class="flex items-center justify-between bg-nord-2 rounded-lg p-4 transform hover:scale-[1.02] transition-all duration-300">
+                    <div>
+                        <span class="text-nord-4 font-medium"><%= state.name %></span>
+                        <span class="ml-2 text-sm text-nord-3">(<%= state.type %>)</span>
+                    </div>
+                    <form action="/presence/remove/<%= index %>" method="POST" class="inline">
+                        <button type="submit" class="text-nord-11 hover:text-nord-12 transition-colors duration-200">
+                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            <% }) %>
+        </div>
+
+        <div class="mt-6 pt-6 border-t border-nord-2">
+            <h4 class="text-lg font-medium text-nord-8 mb-4">Add New State</h4>
+            <form action="/presence/add" method="POST" class="space-y-4">
+                <div>
+                    <label class="block text-nord-4 text-sm font-medium mb-2">Status Text</label>
+                    <input type="text" name="name" required placeholder="🎮 Playing something..."
+                        class="w-full bg-nord-2 border border-nord-3 rounded-lg px-4 py-2 text-nord-4 focus:ring-2 focus:ring-nord-8 focus:border-transparent">
+                </div>
+                
+                <div>
+                    <label class="block text-nord-4 text-sm font-medium mb-2">Activity Type</label>
+                    <select name="type" class="w-full bg-nord-2 border border-nord-3 rounded-lg px-4 py-2 text-nord-4 focus:ring-2 focus:ring-nord-8 focus:border-transparent">
+                        <option value="Playing">Playing</option>
+                        <option value="Watching">Watching</option>
+                        <option value="Listening">Listening</option>
+                        <option value="Competing">Competing</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="w-full bg-nord-14 hover:bg-opacity-90 text-nord-0 font-semibold py-2 px-4 rounded-lg transition-all duration-300 hover:scale-[1.02]">
+                    Add New State
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
