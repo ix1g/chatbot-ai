@@ -21,6 +21,7 @@
                             <div class="ml-10 flex items-baseline space-x-4">
                                 <a href="/" class="<%= title === 'Dashboard' ? 'bg-nord-2 text-nord-8' : 'text-nord-4 hover:bg-nord-2 hover:text-nord-8' %> rounded-md px-3 py-2 text-sm font-medium transition-all duration-200">Home</a>
                                 <a href="/stats" class="<%= title === 'Statistics' ? 'bg-nord-2 text-nord-8' : 'text-nord-4 hover:bg-nord-2 hover:text-nord-8' %> rounded-md px-3 py-2 text-sm font-medium transition-all duration-200">Statistics</a>
+                                <a href="/presence" class="<%= title === 'Presence Management' ? 'bg-nord-2 text-nord-8' : 'text-nord-4 hover:bg-nord-2 hover:text-nord-8' %> rounded-md px-3 py-2 text-sm font-medium transition-all duration-200">Presence</a>
                                 <a href="/config" class="<%= title === 'Configuration' ? 'bg-nord-2 text-nord-8' : 'text-nord-4 hover:bg-nord-2 hover:text-nord-8' %> rounded-md px-3 py-2 text-sm font-medium transition-all duration-200">Configuration</a>
                             </div>
                         </div>
@@ -45,17 +46,58 @@
                     <div class="-mr-2 flex md:hidden">
                         <button type="button" @click="mobileMenu = !mobileMenu" class="inline-flex items-center justify-center rounded-md bg-nord-2 p-2 text-nord-4 hover:bg-nord-3 hover:text-nord-8 focus:outline-none focus:ring-2 focus:ring-nord-8">
                             <span class="sr-only">Open main menu</span>
-                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                            <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
                             </svg>
                         </button>
                     </div>
                 </div>
             </div>
+
+            <!-- Mobile menu -->
+            <div x-show="mobileMenu" class="md:hidden" x-cloak>
+                <div class="space-y-1 px-2 pb-3 pt-2 sm:px-3">
+                    <a href="/" class="<%= title === 'Dashboard' ? 'bg-nord-2 text-nord-8' : 'text-nord-4' %> block rounded-md px-3 py-2 text-base font-medium">Home</a>
+                    <a href="/stats" class="<%= title === 'Statistics' ? 'bg-nord-2 text-nord-8' : 'text-nord-4' %> block rounded-md px-3 py-2 text-base font-medium">Statistics</a>
+                    <a href="/presence" class="<%= title === 'Presence Management' ? 'bg-nord-2 text-nord-8' : 'text-nord-4' %> block rounded-md px-3 py-2 text-base font-medium">Presence</a>
+                    <a href="/config" class="<%= title === 'Configuration' ? 'bg-nord-2 text-nord-8' : 'text-nord-4' %> block rounded-md px-3 py-2 text-base font-medium">Configuration</a>
+                </div>
+            </div>
         </nav>
 
         <main>
             <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+                <!-- Flash Messages -->
+                <% if (locals.success && success.length > 0) { %>
+                    <div class="mb-4 rounded-md bg-nord-14 bg-opacity-10 p-4 animate-fade-in">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <svg class="h-5 w-5 text-nord-14" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-nord-14"><%= success %></p>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+
+                <% if (locals.error && error.length > 0) { %>
+                    <div class="mb-4 rounded-md bg-nord-11 bg-opacity-10 p-4 animate-fade-in">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <svg class="h-5 w-5 text-nord-11" viewBox="0 0 20 20" fill="currentColor">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-nord-11"><%= error %></p>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+
                 <div class="animate-fade-in">
                     <%- body %>
                 </div>

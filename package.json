@@ -1,47 +1,49 @@
 {
-  "name": "gemini-bot",
-  "version": "1.0.0",
-  "description": "A Discord bot integrated with Google's Gemini API and a web-based chat interfacee",
-  "main": "index.js",
-  "scripts": {
-    "start": "node start.js",
-    "dev": "nodemon start.js",
-    "bot": "node index.js",
-    "dashboard": "node dashboard/server.js"
-  },
-  "dependencies": {
-    "@google-cloud/vision": "^5.1.0",
-    "@tailwindcss/forms": "^0.5.10",
-    "autoprefixer": "^10.4.21",
-    "axios": "^1.9.0",
-    "connect-flash": "^0.1.1",
-    "cookie-parser": "^1.4.7",
-    "cors": "^2.8.5",
-    "discord.js": "^14.13.0",
-    "dotenv": "^16.3.1",
-    "ejs": "^3.1.10",
-    "express": "^4.21.2",
-    "express-session": "^1.18.1",
-    "morgan": "^1.10.0",
-    "node-cache": "^5.1.2",
-    "postcss": "^8.5.3",
-    "sharp": "^0.34.1",
-    "tailwindcss": "^4.1.4",
-    "tesseract.js": "^6.0.1"
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.2"
-  },
-  "engines": {
-    "node": ">=16.0.0"
-  },
-  "keywords": [
-    "discord-bot",
-    "gemini-api",
-    "chatbot",
-    "web-interface",
-    "SaYrZ Studio"
-  ],
-  "author": "SaYrZ",
-  "license": "MIT"
+    "name": "gemini-bot",
+    "version": "1.0.0",
+    "description": "A Discord bot integrated with Google's Gemini API and a web-based chat interface",
+    "main": "index.js",
+    "scripts": {
+        "start": "node start.js",
+        "dev": "nodemon start.js",
+        "bot": "node src/index.js",
+        "dashboard": "npm run build:css && node dashboard/server.js",
+        "build:css": "node dashboard/build.js",
+        "watch:css": "tailwindcss -i ./dashboard/public/css/style.css -o ./dashboard/public/css/output.css --watch"
+    },
+    "dependencies": {
+        "@google-cloud/vision": "^5.1.0",
+        "@tailwindcss/forms": "^0.5.10",
+        "autoprefixer": "^10.4.21",
+        "axios": "^1.9.0",
+        "connect-flash": "^0.1.1",
+        "cookie-parser": "^1.4.7",
+        "cors": "^2.8.5",
+        "discord.js": "^14.13.0",
+        "dotenv": "^16.3.1",
+        "ejs": "^3.1.10",
+        "express": "^4.21.2",
+        "express-session": "^1.18.1",
+        "morgan": "^1.10.0",
+        "node-cache": "^5.1.2",
+        "postcss": "^8.5.3",
+        "sharp": "^0.34.1",
+        "tailwindcss": "^4.1.4",
+        "tesseract.js": "^6.0.1"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.2"
+    },
+    "engines": {
+        "node": ">=16.0.0"
+    },
+    "keywords": [
+        "discord-bot",
+        "gemini-api",
+        "chatbot",
+        "web-interface",
+        "SaYrZ Studio"
+    ],
+    "author": "SaYrZ",
+    "license": "MIT"
 }
