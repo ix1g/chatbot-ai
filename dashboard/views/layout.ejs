@@ -1,47 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="h-full">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %> - Discord Bot Dashboard</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
+    <link href="/css/output.css" rel="stylesheet">
+    <script defer src="https://unpkg.com/@alpinejs/collapse@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="/">Bot Dashboard</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/stats">Statistics</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/config">Configuration</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav ms-auto">
-                    <% if (locals.user) { %>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/auth/logout">Logout</a>
-                        </li>
-                    <% } %>
-                </ul>
+<body class="h-full bg-nord-0 text-nord-4">
+    <div class="min-h-full">
+        <nav class="bg-nord-1 border-b border-nord-2">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="flex h-16 items-center justify-between">
+                    <div class="flex items-center">
+                        <div class="flex-shrink-0">
+                            <span class="text-2xl font-bold text-nord-8">Bot Dashboard</span>
+                        </div>
+                        <div class="hidden md:block">
+                            <div class="ml-10 flex items-baseline space-x-4">
+                                <a href="/" class="<%= title === 'Dashboard' ? 'bg-nord-2 text-nord-8' : 'text-nord-4 hover:bg-nord-2 hover:text-nord-8' %> rounded-md px-3 py-2 text-sm font-medium transition-all duration-200">Home</a>
+                                <a href="/stats" class="<%= title === 'Statistics' ? 'bg-nord-2 text-nord-8' : 'text-nord-4 hover:bg-nord-2 hover:text-nord-8' %> rounded-md px-3 py-2 text-sm font-medium transition-all duration-200">Statistics</a>
+                                <a href="/config" class="<%= title === 'Configuration' ? 'bg-nord-2 text-nord-8' : 'text-nord-4 hover:bg-nord-2 hover:text-nord-8' %> rounded-md px-3 py-2 text-sm font-medium transition-all duration-200">Configuration</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden md:block">
+                        <div class="ml-4 flex items-center md:ml-6">
+                            <button type="button" class="rounded-full bg-nord-2 p-1 text-nord-4 hover:text-nord-8 transition-colors duration-200">
+                                <span class="sr-only">View notifications</span>
+                                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                                </svg>
+                            </button>
+                            <% if (locals.user) { %>
+                                <div class="ml-3">
+                                    <a href="/auth/logout" class="inline-flex items-center rounded-md bg-nord-10 px-3 py-2 text-sm font-semibold text-nord-6 shadow-sm hover:bg-nord-9 transition-colors duration-200">
+                                        Logout
+                                    </a>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div>
+                    <div class="-mr-2 flex md:hidden">
+                        <button type="button" @click="mobileMenu = !mobileMenu" class="inline-flex items-center justify-center rounded-md bg-nord-2 p-2 text-nord-4 hover:bg-nord-3 hover:text-nord-8 focus:outline-none focus:ring-2 focus:ring-nord-8">
+                            <span class="sr-only">Open main menu</span>
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-    <div class="container mt-4">
-        <%- body %>
+        <main>
+            <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+                <div class="animate-fade-in">
+                    <%- body %>
+                </div>
+            </div>
+        </main>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/js/main.js"></script>
 </body>
 </html>
