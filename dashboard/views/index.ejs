@@ -1,0 +1,64 @@
+<%- include('layout', { title: 'Dashboard' }) %>
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Bot Status</h5>
+                <p class="card-text">
+                    <span class="badge bg-<%= botStatus === 'Online' ? 'success' : 'danger' %>">
+                        <%= botStatus %>
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-8">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Quick Actions</h5>
+                <div class="d-grid gap-2">
+                    <a href="/stats" class="btn btn-primary">View Statistics</a>
+                    <a href="/config" class="btn btn-secondary">Configure Bot</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Recent Activity</h5>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Event</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (locals.recentActivity && recentActivity.length > 0) { %>
+                                <% recentActivity.forEach(activity => { %>
+                                    <tr>
+                                        <td><%= activity.time %></td>
+                                        <td><%= activity.event %></td>
+                                        <td><%= activity.details %></td>
+                                    </tr>
+                                <% }) %>
+                            <% } else { %>
+                                <tr>
+                                    <td colspan="3" class="text-center">No recent activity</td>
+                                </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
