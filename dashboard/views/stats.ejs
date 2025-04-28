@@ -1,0 +1,94 @@
+<%- include('layout', { title: 'Statistics' }) %>
+
+<div class="row">
+    <div class="col-md-6 col-xl-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Messages Processed</h5>
+                <h2 class="card-text"><%= stats.totalMessages %></h2>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 col-xl-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Active Users</h5>
+                <h2 class="card-text"><%= stats.activeUsers %></h2>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 col-xl-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Avg Response Time</h5>
+                <h2 class="card-text"><%= stats.avgResponseTime.toFixed(2) %>s</h2>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6 col-xl-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Uptime</h5>
+                <h2 class="card-text"><%= Math.floor(stats.uptime / 3600) %>h <%= Math.floor((stats.uptime % 3600) / 60) %>m</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Memory Usage</h5>
+                <div class="table-responsive">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>Heap Used</th>
+                                <td><%= (stats.memoryUsage.heapUsed / 1024 / 1024).toFixed(2) %> MB</td>
+                            </tr>
+                            <tr>
+                                <th>Heap Total</th>
+                                <td><%= (stats.memoryUsage.heapTotal / 1024 / 1024).toFixed(2) %> MB</td>
+                            </tr>
+                            <tr>
+                                <th>RSS</th>
+                                <td><%= (stats.memoryUsage.rss / 1024 / 1024).toFixed(2) %> MB</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Bot Status</h5>
+                <p class="card-text">
+                    Status: <span class="badge bg-success bot-status">Online</span>
+                </p>
+                <p class="card-text">
+                    Last Update: <span id="lastUpdate"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Format the last update time
+    function updateLastUpdate() {
+        const lastUpdateEl = document.getElementById('lastUpdate');
+        if (lastUpdateEl) {
+            const now = new Date();
+            lastUpdateEl.textContent = now.toLocaleTimeString();
+        }
+    }
+    updateLastUpdate();
+    setInterval(updateLastUpdate, 1000);
+</script>
