@@ -1,51 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #2E3440;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4C566A;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #81A1C1;
+}
+
+/* Nord Theme Base Styles */
+body {
+    @apply bg-nord-0 text-nord-4;
+}
+
 .navbar {
-    margin-bottom: 2rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    @apply bg-nord-1 shadow-lg animate-fade-in;
 }
 
 .card {
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    border: none;
-    margin-bottom: 1.5rem;
-}
-
-.card-title {
-    color: #333;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-}
-
-.table {
-    margin-bottom: 0;
+    @apply bg-nord-1 rounded-lg shadow-xl transition-all duration-300 hover:shadow-2xl animate-slide-up;
 }
 
 .btn-primary {
-    background-color: #5865F2;
-    border-color: #5865F2;
+    @apply bg-nord-10 hover:bg-nord-9 text-nord-6 font-semibold py-2 px-4 rounded-lg 
+    transition-all duration-300 hover:scale-105 focus:ring-2 focus:ring-nord-8 focus:ring-opacity-50;
 }
 
-.btn-primary:hover {
-    background-color: #4752c4;
-    border-color: #4752c4;
+.form-control {
+    @apply bg-nord-2 border-nord-3 text-nord-4 rounded-lg transition-all duration-200
+    focus:border-nord-8 focus:ring-2 focus:ring-nord-8 focus:ring-opacity-50;
+}
+
+.table {
+    @apply w-full text-nord-4;
+}
+
+.table th {
+    @apply bg-nord-2 text-nord-8 font-semibold px-4 py-2;
+}
+
+.table td {
+    @apply border-t border-nord-2 px-4 py-2;
 }
 
 .badge {
-    padding: 0.5em 1em;
+    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium transition-all duration-300;
 }
 
-.form-control:focus {
-    border-color: #5865F2;
-    box-shadow: 0 0 0 0.2rem rgba(88, 101, 242, 0.25);
+.badge-success {
+    @apply bg-nord-14 text-nord-0;
 }
 
-.alert {
-    margin-bottom: 1.5rem;
+.badge-danger {
+    @apply bg-nord-11 text-nord-0;
+}
+
+/* Card hover effects */
+.card:hover .card-title {
+    @apply text-nord-8;
 }
 
 .nav-link {
-    color: rgba(255,255,255,0.8) !important;
+    @apply text-nord-4 hover:text-nord-8 transition-all duration-200;
 }
 
-.nav-link:hover {
-    color: #fff !important;
+/* Stats cards animation */
+.stats-card {
+    @apply transform transition-all duration-300 hover:-translate-y-1;
+}
+
+/* Form elements */
+.form-label {
+    @apply text-nord-4 font-medium mb-1;
+}
+
+.form-text {
+    @apply text-nord-3 text-sm mt-1;
+}
+
+/* Alerts */
+.alert {
+    @apply rounded-lg p-4 mb-4 animate-fade-in;
+}
+
+.alert-danger {
+    @apply bg-nord-11 bg-opacity-20 text-nord-11 border border-nord-11 border-opacity-20;
+}
+
+.alert-success {
+    @apply bg-nord-14 bg-opacity-20 text-nord-14 border border-nord-14 border-opacity-20;
+}
+
+/* Loading states */
+.loading {
+    @apply animate-pulse bg-nord-2;
 }
