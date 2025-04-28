@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@google-cloud/vision": "^5.1.0",
+    "@tailwindcss/forms": "^0.5.10",
+    "autoprefixer": "^10.4.21",
     "axios": "^1.9.0",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
@@ -21,7 +23,9 @@
     "express-session": "^1.18.1",
     "morgan": "^1.10.0",
     "node-cache": "^5.1.2",
+    "postcss": "^8.5.3",
     "sharp": "^0.34.1",
+    "tailwindcss": "^4.1.4",
     "tesseract.js": "^6.0.1"
   },
   "devDependencies": {
