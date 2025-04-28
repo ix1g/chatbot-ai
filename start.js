@@ -2,54 +2,53 @@ require('dotenv').config();
 const { spawn } = require('child_process');
 const path = require('path');
 
-function startService(name, command, args, cwd) {
-    console.log(`Starting ${name}...`);
-    const process = spawn(command, args, {
-        cwd: cwd,
-        stdio: 'pipe'
-    });
+// Function to build Tailwind CSS
+async function buildTailwind() {
+    if (process.env.DASHBOARD === 'true') {
+        console.log('Building Tailwind CSS...');
+        const tailwindBuild = spawn('npx', [
+            'tailwindcss',
+            '-i',
+            './dashboard/public/css/style.css',
+            '-o',
+            './dashboard/public/css/output.css',
+            '--minify'
+        ]);
 
-    process.stdout.on('data', (data) => {
-        console.log(`[${name}] ${data.toString().trim()}`);
-    });
+        tailwindBuild.stdout.on('data', (data) => {
+            console.log(`Tailwind: ${data}`);
+        });
 
-    process.stderr.on('data', (data) => {
-        console.error(`[${name}] ${data.toString().trim()}`);
-    });
+        tailwindBuild.stderr.on('data', (data) => {
+            console.error(`Tailwind Error: ${data}`);
+        });
 
-    process.on('close', (code) => {
-        console.log(`[${name}] process exited with code ${code}`);
-    });
-
-    return process;
+        // Wait for Tailwind build to complete
+        await new Promise((resolve) => {
+            tailwindBuild.on('close', resolve);
+        });
+    }
 }
 
-// Start the Discord bot
-const bot = startService(
-    'Discord Bot',
-    'node',
-    ['index.js'],
-    __dirname
-);
+// Start the application
+async function startApp() {
+    try {
+        // Build Tailwind CSS if dashboard is enabled
+        await buildTailwind();
 
-// Start the Dashboard
-const dashboard = startService(
-    'Dashboard',
-    'node',
-    ['server.js'],
-    path.join(__dirname, 'dashboard')
-);
+        // Start the main application
+        require('./src/index');
 
-// Handle process termination
-process.on('SIGTERM', () => {
-    console.log('Shutting down services...');
-    bot.kill();
-    dashboard.kill();
-});
+        console.log('\n=================================');
+        console.log('🤖 Bot is running successfully!');
+        if (process.env.DASHBOARD === 'true') {
+            console.log(`📊 Dashboard available at http://localhost:${process.env.DASHBOARD_PORT || 3000}`);
+        }
+        console.log('=================================\n');
+    } catch (error) {
+        console.error('Failed to start application:', error);
+        process.exit(1);
+    }
+}
 
-process.on('SIGINT', () => {
-    console.log('Shutting down services...');
-    bot.kill();
-    dashboard.kill();
-    process.exit(0);
-});
+startApp();
