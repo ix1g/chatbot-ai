@@ -1,6 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
@@ -8,102 +8,46 @@
 }
 
 ::-webkit-scrollbar-track {
-    background: #2E3440;
+    background: theme('colors.nord.0');
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #4C566A;
+    background: theme('colors.nord.3');
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #81A1C1;
+    background: theme('colors.nord.9');
 }
 
-/* Nord Theme Base Styles */
-body {
-    @apply bg-nord-0 text-nord-4;
-}
+@layer components {
+    .btn-primary {
+        @apply bg-nord-10 hover:bg-nord-9 text-nord-6 font-semibold py-2 px-4 rounded-lg 
+        transition-all duration-300 hover:scale-105 focus:ring-2 focus:ring-nord-8 focus:ring-opacity-50;
+    }
 
-.navbar {
-    @apply bg-nord-1 shadow-lg animate-fade-in;
-}
+    .form-control {
+        @apply bg-nord-2 border-nord-3 text-nord-4 rounded-lg transition-all duration-200
+        focus:border-nord-8 focus:ring-2 focus:ring-nord-8 focus:ring-opacity-50;
+    }
 
-.card {
-    @apply bg-nord-1 rounded-lg shadow-xl transition-all duration-300 hover:shadow-2xl animate-slide-up;
-}
+    .card {
+        @apply bg-nord-1 rounded-lg shadow-xl transition-all duration-300 hover:shadow-2xl animate-slide-up;
+    }
 
-.btn-primary {
-    @apply bg-nord-10 hover:bg-nord-9 text-nord-6 font-semibold py-2 px-4 rounded-lg 
-    transition-all duration-300 hover:scale-105 focus:ring-2 focus:ring-nord-8 focus:ring-opacity-50;
-}
+    .table {
+        @apply w-full text-nord-4;
+    }
 
-.form-control {
-    @apply bg-nord-2 border-nord-3 text-nord-4 rounded-lg transition-all duration-200
-    focus:border-nord-8 focus:ring-2 focus:ring-nord-8 focus:ring-opacity-50;
-}
+    .table th {
+        @apply bg-nord-2 text-nord-8 font-semibold px-4 py-2;
+    }
 
-.table {
-    @apply w-full text-nord-4;
-}
+    .table td {
+        @apply border-t border-nord-2 px-4 py-2;
+    }
 
-.table th {
-    @apply bg-nord-2 text-nord-8 font-semibold px-4 py-2;
-}
-
-.table td {
-    @apply border-t border-nord-2 px-4 py-2;
-}
-
-.badge {
-    @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium transition-all duration-300;
-}
-
-.badge-success {
-    @apply bg-nord-14 text-nord-0;
-}
-
-.badge-danger {
-    @apply bg-nord-11 text-nord-0;
-}
-
-/* Card hover effects */
-.card:hover .card-title {
-    @apply text-nord-8;
-}
-
-.nav-link {
-    @apply text-nord-4 hover:text-nord-8 transition-all duration-200;
-}
-
-/* Stats cards animation */
-.stats-card {
-    @apply transform transition-all duration-300 hover:-translate-y-1;
-}
-
-/* Form elements */
-.form-label {
-    @apply text-nord-4 font-medium mb-1;
-}
-
-.form-text {
-    @apply text-nord-3 text-sm mt-1;
-}
-
-/* Alerts */
-.alert {
-    @apply rounded-lg p-4 mb-4 animate-fade-in;
-}
-
-.alert-danger {
-    @apply bg-nord-11 bg-opacity-20 text-nord-11 border border-nord-11 border-opacity-20;
-}
-
-.alert-success {
-    @apply bg-nord-14 bg-opacity-20 text-nord-14 border border-nord-14 border-opacity-20;
-}
-
-/* Loading states */
-.loading {
-    @apply animate-pulse bg-nord-2;
+    .badge {
+        @apply inline-flex items-center px-3 py-1 rounded-full text-sm font-medium transition-all duration-300;
+    }
 }
